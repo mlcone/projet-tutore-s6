@@ -3,7 +3,7 @@
 
 ## logstash
 
-Requis : Elastisearch et Logstash
+Requis : Elastisearch, Logstash et Java
 
 Structure de fichier
 
