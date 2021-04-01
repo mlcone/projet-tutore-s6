@@ -1,9 +1,9 @@
 # projet-tutore-s6
 
 
-## logstash
+## Ajout des index via logstash
 
-Requis : Elastisearch et Logstash
+Requis : Elastisearch, Logstash et Java
 
 ### Structure de fichier
 
