@@ -6,6 +6,7 @@
 Requis : Elastisearch et Logstash
 
 Structure de fichier
-.
-├── conf_files                   # Fichiers de config pour logstash
-└── steam_csv                    # Fichiers csv contenant les données
+
+    .
+    ├── conf_files                   # Fichiers de config pour logstash
+    └── steam_csv                    # Fichiers csv contenant les données
