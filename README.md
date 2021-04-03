@@ -1,12 +1,7 @@
 # projet-tutore-s6
 
 
-## logstash
+Version 1.0 (initial version)
 
-Requis : Elastisearch et Logstash
-
-Structure de fichier
-
-    .
-    ├── conf_files                   # Fichiers de config pour logstash
-    └── steam_csv                    # Fichiers csv contenant les données
+- Création projet react
+- Ajout Axios
