@@ -22,7 +22,14 @@ final class MainController extends AbstractController
      */
     public function index(): Response
     {
+        return $this->render('main/homepage.html.twig');
+    }
 
+    /**
+     * @Route("/game/{name}", name="searchGame", methods={"POST"})
+     */
+    public function searchGame(string $name): Response
+    {
         $client = ClientBuilder::create()->build();
 
         $params = [
@@ -30,17 +37,46 @@ final class MainController extends AbstractController
             'body'  => [
                 'query' => [
                     'match' => [
-                        'message' => 'Half-Life'
+                        'message' => $name
                     ]
                 ]
             ]
         ];
 
         $response = $client->search($params);
-        //print_r($response);
-        //dd($response['hits']['hits'][0]['_source']['message']);
-        $tabResponse = explode(',', $response['hits']['hits'][0]['_source']['message']);
-        dd($response);
-        return $this->render('main/homepage.html.twig');
+
+        $nbResponse = count($response['hits']['hits']);
+
+        $tabResponse = [];
+
+        for ($i = 0; $i < $nbResponse; $i++) {
+            $tabResponse[$i] = explode(',', $response['hits']['hits'][$i]['_source']['message']);
+
+            $values[] = array
+            (
+                'appid'=> $tabResponse[$i][0],
+                'name'=> $tabResponse[$i][1],
+                'release_date'=> $tabResponse[$i][2],
+                'english'=> $tabResponse[$i][3],
+                'developer'=> $tabResponse[$i][4],
+                'publisher'=> $tabResponse[$i][5],
+                'platforms'=> $tabResponse[$i][6],
+                'required_age'=> $tabResponse[$i][7],
+                'categories'=> $tabResponse[$i][8],
+                'genres'=> $tabResponse[$i][9],
+                'steamspy_tags'=> $tabResponse[$i][10],
+                'achievements'=> $tabResponse[$i][11],
+                'positive_rattings'=> $tabResponse[$i][12],
+                'negative_rattings'=> $tabResponse[$i][13],
+                'average_playtime'=> $tabResponse[$i][14],
+                'median_playtime'=> $tabResponse[$i][15],
+                'owners'=> $tabResponse[$i][16],
+                'price'=> $tabResponse[$i][17],
+            );
+        }
+
+        return new Response(
+            json_encode($values)
+        );
     }
 }

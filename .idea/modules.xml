@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/.idea/ElasticSymfony.iml" filepath="$PROJECT_DIR$/.idea/ElasticSymfony.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../elasticreact/.idea/elasticreact.iml" filepath="$PROJECT_DIR$/../elasticreact/.idea/elasticreact.iml" />
     </modules>
   </component>
 </project>
