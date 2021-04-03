@@ -5,3 +5,6 @@ Version 1.0 (initial version)
 - Ajout elasticsearch-php (https://github.com/elastic/elasticsearch-php)
 - Ajout templates/main/homepage.html.twig
 - Ajout Controller/MainController.php + code simple d'exemple de récupération d'information (ElasticSearch) via une variable
+
+Version 1.1 (current version)
+- Ajout API recherche liste de jeux (paramètre: nom de jeu)
