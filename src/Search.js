@@ -1,5 +1,6 @@
 import React from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default class SearchForm extends React.Component {
     constructor(props) {
@@ -21,7 +22,7 @@ export default class SearchForm extends React.Component {
     }
 
     handleChange(event) {
-        var value = event.target.value;
+        let value = event.target.value;
 
         this.setState({
             gameName: value
@@ -41,7 +42,7 @@ export default class SearchForm extends React.Component {
                 </label>
                 <input type="submit" value="Rechercher" />
                 <ul>
-                    { this.state.games.map(game => <li key={game.appid}>{game.name}</li>)}
+                    { this.state.games.map(game => <Link key={game.appid} to={'/fiche/?appid='+ game.appid}><li>{game.name}</li></Link>)}
                 </ul>
             </form>
         );
