@@ -154,6 +154,7 @@ final class MainController extends AbstractController
             'publisher'=> $tabResponse['publisher'],
             'platforms'=> $tabResponse['platforms'],
             'required_age'=> $tabResponse['required_age'],
+            'developer'=> $tabResponse['developer'],
             'categories'=> $tabResponse['categories'],
             'genres'=> $tabResponse['genres'],
             'steamspy_tags'=> $tabResponse['steamspy_tags'],
@@ -175,7 +176,8 @@ final class MainController extends AbstractController
         $tabResponse = $response['hits']['hits'][0]['_source'];
 
         $values[0]['header_image'] = $tabResponse['header_image'];
-
+        $values[0]['screenshots'] = $tabResponse['screenshots'];
+        
         return new Response(
             json_encode($values)
         );
