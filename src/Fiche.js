@@ -25,18 +25,17 @@ class Fiche extends Component {
                 const games = res.data;
                 this.setState({ games });
             })
-
     }
 
     render() {
         return (
             <div>
                 <a href="/">Retour</a>
-
                 { this.sendRequest()}
                 <h1>Fiche Page {this.extractParamsUrl(this.props.location.search)}</h1>
 
                 { this.state.games.map(game => <h1 key={game.appid}>{game.name}</h1>) }
+                { this.state.games.map(game => <img key={game.appid} alt={game.name} src={game.header_image}/>) }
                 { this.state.games.map(game => <p key={game.appid}>Date de sortie: {game.release_date}</p>) }
                 { this.state.games.map(game => <p key={game.appid}>Développeur: {game.developer}</p>) }
                 { this.state.games.map(game => <p key={game.appid}>Publisher: {game.publisher}</p>) }
