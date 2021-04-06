@@ -23,5 +23,8 @@ Version 1.2
 Version 1.3
 - Modification des APIs dû au changement du logstash.conf
 
-Version 1.4 (current version)
+Version 1.4
 - Ajout API Pagination
+
+Version 1.5 (current version)
+- Ajout header-image API gameFiche
