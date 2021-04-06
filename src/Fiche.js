@@ -19,7 +19,7 @@ class Fiche extends Component {
     }
 
     sendRequest() {
-        axios.post(`http://localhost:8000/game/` + this.extractParamsUrl(this.props.location.search))
+        axios.post(`http://localhost:8000/game/fiche/` + this.extractParamsUrl(this.props.location.search))
             .then(res => {
                 const games = res.data;
                 this.setState({ games });
