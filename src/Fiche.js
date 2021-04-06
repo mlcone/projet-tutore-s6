@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import axios from "axios";
 import { path } from './config/config.json';
+import { Button, Grid, Typography } from '@material-ui/core';
+import Carousel from 'react-material-ui-carousel';
+
+import "./Fiche.css";
 
 class Fiche extends Component {
 
@@ -9,7 +13,9 @@ class Fiche extends Component {
         super(props);
         this.state = {
             gameName: "",
-            games: []
+            updateList: true,
+            games: [],
+            screenshots: []
         };
     }
 
@@ -20,28 +26,56 @@ class Fiche extends Component {
     }
 
     sendRequest() {
+        if(this.state.updateList === true){
         axios.post(`http://` + path + `/game/fiche/` + this.extractParamsUrl(this.props.location.search))
             .then(res => {
                 const games = res.data;
                 this.setState({ games });
+                this.setState({ updateList: false });
+                this.setState({ screenshots: []})
             })
-
+            let myObj = "[{'id':0, }]"//this.state.games.map((data) => (data.screenshots));
+        console.log(JSON.parse(myObj));
+        }
     }
 
     render() {
         return (
             <div>
-                <a href="/">Retour</a>
+                <Button href="/">Retour</Button>
 
                 { this.sendRequest()}
-                <h1>Fiche Page {this.extractParamsUrl(this.props.location.search)}</h1>
+                <Grid container spacing={3}>
+                    <Grid item container xs={12}>
+                        <Grid item xs>
+                            <img src={this.state.games.map(game => (game.header_image))} alt="thumbnail"></img>
+                        </Grid>
+                        <Grid item xs>
+                            <Typography gutterBottom variant="subtitle1">
+                                {this.state.games.map(game => (game.name))}
+                            </Typography>
+                            <Typography variant="body2" color="textSecondary">
+                                Release date : {this.state.games.map(game => (game.release_date))} <br/>
+                                Plateformes : { this.state.games.map(game =>  (game.platforms)) } <br/>
+                                Publisher : { this.state.games.map(game =>  (game.publisher)) } <br/>
+                                Developer : { this.state.games.map(game =>  (game.developer)) } <br/>
+                            </Typography>
+                        </Grid>
+                    </Grid>
+                    <Grid item container xs={12}>
+                        <Grid item xs>
+                            <Carousel>
+                                {
+                                    this.state.screenshots.map((data) => <img src={data.src} alt={data.alt} className="carouselDisplay"/>)
+                                }
+                            </Carousel>
+                        </Grid>
+                        <Grid item xs>
 
-                { this.state.games.map(game => <h1 key={game.appid}>{game.name}</h1>) }
-                { this.state.games.map(game => <p key={game.appid}>Date de sortie: {game.release_date}</p>) }
-                { this.state.games.map(game => <p key={game.appid}>Développeur: {game.developer}</p>) }
-                { this.state.games.map(game => <p key={game.appid}>Publisher: {game.publisher}</p>) }
-                { this.state.games.map(game => <p key={game.appid}>Plateforme: {game.platforms}</p>) }
-                { this.state.games.map(game => <p key={game.appid}>Age minimum: {game.required_age}</p>) }
+                        </Grid>
+                    </Grid>
+                </Grid>
+
                 { this.state.games.map(game => <p key={game.appid}>Categories: {game.categories}</p>) }
                 { this.state.games.map(game => <p key={game.appid}>Genres: {game.genres}</p>) }
                 { this.state.games.map(game => <p key={game.appid}>Tags utilisateurs: {game.steamspy_tags}</p>) }
