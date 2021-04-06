@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from "axios";
-import {path} from './config/config.json';
+import { path } from './config/config.json';
 
 class Fiche extends Component {
 
@@ -11,7 +11,6 @@ class Fiche extends Component {
             gameName: "",
             games: []
         };
-        console.log(path);
     }
 
     extractParamsUrl(chaineGET)
