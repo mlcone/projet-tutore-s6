@@ -49,11 +49,28 @@ final class MainController extends AbstractController
 
         for ($i = 0; $i < $nbResponse; $i++) {
             $tabResponse[$i] = $response['hits']['hits'][$i]['_source'];
+            
+            $localParams = [
+                'index' => 'steam_media_data',
+                'body' => [
+                    'size' => '1',
+                    'query' => [
+                        'match' => [
+                            'steam_appid' => $tabResponse[$i]['appid']
+                        ] 
+                    ]
+                ]
+            ];
 
+            $localResponse = $client->search($localParams);
+            
             $values[] = array
             (
-                'appid'=> $tabResponse[$i]['appid'],
-                'name'=> $tabResponse[$i]['name'],
+                'appid' => $tabResponse[$i]['appid'],
+                'name' => $tabResponse[$i]['name'],
+                'release_date' => $tabResponse[$i]['release_date'],
+                'score' => $tabResponse[$i]['positive_ratings'] - $tabResponse[$i]['negative_ratings'],
+                'thumbnail' => $localResponse['hits']['hits'][0]['_source']['header_image']
             );
         }
 
