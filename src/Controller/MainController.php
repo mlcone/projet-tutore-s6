@@ -26,6 +26,30 @@ final class MainController extends AbstractController
     }
 
     /**
+     * @Route("/games", name="allGames", methods={"GET"})
+     */
+    public function allGames(): Response
+    {
+        /*
+        $client = ClientBuilder::create()->build();
+
+        $params = [
+            'index' => 'steam',
+            'body'  => [
+                'from' => '1',
+                'size' => '20'
+            ]
+        ];
+
+        $response = $client->search($params);
+
+        return new Response(
+            json_encode($values)
+        );
+        */
+    }
+
+    /**
      * @Route("/game/{name}", name="searchGame", methods={"POST"})
      */
     public function searchGame(string $name): Response
@@ -38,6 +62,46 @@ final class MainController extends AbstractController
                 'query' => [
                     'match' => [
                         'message' => $name
+                    ]
+                ]
+            ]
+        ];
+
+        $response = $client->search($params);
+
+        $nbResponse = count($response['hits']['hits']);
+
+        $tabResponse = [];
+
+        for ($i = 0; $i < $nbResponse; $i++) {
+            $tabResponse[$i] = explode(',', $response['hits']['hits'][$i]['_source']['message']);
+
+            $values[] = array
+            (
+                'appid'=> $tabResponse[$i][0],
+                'name'=> $tabResponse[$i][1],
+            );
+        }
+
+        return new Response(
+            json_encode($values)
+        );
+    }
+
+    /**
+     * @Route("/game/fiche/{id}", name="gameFiche", methods={"POST"})
+     */
+    public function gameFiche(int $id): Response
+    {
+        $client = ClientBuilder::create()->build();
+
+        $params = [
+            'index' => 'steam',
+            'body'  => [
+                'size' => '1',
+                'query' => [
+                    'match' => [
+                        'message' => $id
                     ]
                 ]
             ]
