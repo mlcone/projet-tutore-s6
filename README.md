@@ -17,5 +17,8 @@ Version 1.0 (initial version)
 Version 1.1
 - Ajout API recherche liste de jeux (paramètre: nom de jeu)
 
-Version 1.2 (current version)
+Version 1.2 
 - Séparation API gameFiche et searchGame
+
+Version 1.3 (current version)
+- Réorganisation des APIs
