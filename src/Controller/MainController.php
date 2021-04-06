@@ -30,11 +30,11 @@ final class MainController extends AbstractController
      */
     public function allGames(): Response
     {
-        /*
+
         $client = ClientBuilder::create()->build();
 
         $params = [
-            'index' => 'steam',
+            'index' => 'steam_games',
             'body'  => [
                 'from' => '1',
                 'size' => '20'
@@ -43,10 +43,23 @@ final class MainController extends AbstractController
 
         $response = $client->search($params);
 
+        $nbResponse = count($response['hits']['hits']);
+
+        $tabResponse = [];
+
+        for ($i = 0; $i < $nbResponse; $i++) {
+            $tabResponse[$i] = $response['hits']['hits'][$i]['_source'];
+
+            $values[] = array
+            (
+                'appid'=> $tabResponse[$i]['appid'],
+                'name'=> $tabResponse[$i]['name'],
+            );
+        }
+
         return new Response(
             json_encode($values)
         );
-        */
     }
 
     /**
@@ -57,11 +70,11 @@ final class MainController extends AbstractController
         $client = ClientBuilder::create()->build();
 
         $params = [
-            'index' => 'steam',
+            'index' => 'steam_games',
             'body'  => [
                 'query' => [
                     'match' => [
-                        'message' => $name
+                        'name' => $name
                     ]
                 ]
             ]
@@ -74,12 +87,12 @@ final class MainController extends AbstractController
         $tabResponse = [];
 
         for ($i = 0; $i < $nbResponse; $i++) {
-            $tabResponse[$i] = explode(',', $response['hits']['hits'][$i]['_source']['message']);
+            $tabResponse[$i] = $response['hits']['hits'][$i]['_source'];
 
             $values[] = array
             (
-                'appid'=> $tabResponse[$i][0],
-                'name'=> $tabResponse[$i][1],
+                'appid'=> $tabResponse[$i]['appid'],
+                'name'=> $tabResponse[$i]['name'],
             );
         }
 
@@ -96,12 +109,12 @@ final class MainController extends AbstractController
         $client = ClientBuilder::create()->build();
 
         $params = [
-            'index' => 'steam',
+            'index' => 'steam_games',
             'body'  => [
                 'size' => '1',
                 'query' => [
                     'match' => [
-                        'message' => $id
+                        'appid' => $id
                     ]
                 ]
             ]
@@ -109,35 +122,20 @@ final class MainController extends AbstractController
 
         $response = $client->search($params);
 
-        $nbResponse = count($response['hits']['hits']);
+        $tabResponse = $response['hits']['hits'][0]['_source'];
 
-        $tabResponse = [];
-
-        for ($i = 0; $i < $nbResponse; $i++) {
-            $tabResponse[$i] = explode(',', $response['hits']['hits'][$i]['_source']['message']);
-
-            $values[] = array
-            (
-                'appid'=> $tabResponse[$i][0],
-                'name'=> $tabResponse[$i][1],
-                'release_date'=> $tabResponse[$i][2],
-                'english'=> $tabResponse[$i][3],
-                'developer'=> $tabResponse[$i][4],
-                'publisher'=> $tabResponse[$i][5],
-                'platforms'=> $tabResponse[$i][6],
-                'required_age'=> $tabResponse[$i][7],
-                'categories'=> $tabResponse[$i][8],
-                'genres'=> $tabResponse[$i][9],
-                'steamspy_tags'=> $tabResponse[$i][10],
-                'achievements'=> $tabResponse[$i][11],
-                'positive_rattings'=> $tabResponse[$i][12],
-                'negative_rattings'=> $tabResponse[$i][13],
-                'average_playtime'=> $tabResponse[$i][14],
-                'median_playtime'=> $tabResponse[$i][15],
-                'owners'=> $tabResponse[$i][16],
-                'price'=> $tabResponse[$i][17],
-            );
-        }
+        $values[] = array
+        (
+            'appid'=> $tabResponse['appid'],
+            'name'=> $tabResponse['name'],
+            'release_date'=> $tabResponse['release_date'],
+            'publisher'=> $tabResponse['publisher'],
+            'platforms'=> $tabResponse['platforms'],
+            'required_age'=> $tabResponse['required_age'],
+            'categories'=> $tabResponse['categories'],
+            'genres'=> $tabResponse['genres'],
+            'steamspy_tags'=> $tabResponse['steamspy_tags'],
+        );
 
         return new Response(
             json_encode($values)
