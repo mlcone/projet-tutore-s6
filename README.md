@@ -21,4 +21,4 @@ Version 1.2
 - Séparation API gameFiche et searchGame
 
 Version 1.3 (current version)
-- Réorganisation des APIs
+- Modification des APIs dû au changement du logstash.conf
