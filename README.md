@@ -20,5 +20,8 @@ Version 1.1
 Version 1.2 
 - Séparation API gameFiche et searchGame
 
-Version 1.3 (current version)
+Version 1.3
 - Modification des APIs dû au changement du logstash.conf
+
+Version 1.4 (current version)
+- Ajout API Pagination

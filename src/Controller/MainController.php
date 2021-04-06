@@ -26,18 +26,23 @@ final class MainController extends AbstractController
     }
 
     /**
-     * @Route("/games", name="allGames", methods={"GET"})
+     * @Route("/games/{page}", defaults={"page"=1},name="allGames", methods={"GET"})
      */
-    public function allGames(): Response
+    public function allGames(int $page): Response
     {
+        $from = 1;
+        $multip = 9;
+
+        if($page != 1)
+            $from =  $page+($multip*($page-1));
 
         $client = ClientBuilder::create()->build();
 
         $params = [
             'index' => 'steam_games',
             'body'  => [
-                'from' => '1',
-                'size' => '20'
+                'from' => $from,
+                'size' => 10,
             ]
         ];
 
