@@ -3,7 +3,10 @@
 
 ## Ajout des index via logstash
 
-Requis : Elastisearch, Logstash et Java
+Prérequis : Elastisearch, Logstash et Java
+
+Il est recommendé d'ajouter le chemin vers le /bin de logstash et d'elastisearch dans le path dans les variable d'environement pour la suite de l'installation.
+
 
 ### Structure de fichier
 
@@ -29,5 +32,24 @@ input {
 ```
 
 (il faut aussi faire attention à bien remplacer les "\" par "/" sous windows)
+
+Une fois elastisearch lancé (via le .bat se trouvant dans le /bin du dossier d'installation d'elastisearch)
+
+### Ajout des index avec logstash
+
+Maintenant que le path a été mis à jour dans tous les fichier de configuration logstash, il faudra ouvrir un invite de commande dans le dossier où se trouvent les fichiers .conf
+
+Une fois l'invite de commande ouvert, il faudra entrer la commande suivante en indiquant le nom du fichier .conf que vous voulez utiliser :
+```
+logstash -f ./steam_support_info.conf   # encore une fois avec l'exemple de steam_support_info.conf, il faudra lancer la commande pour chaques fichier de config.
+```
+
+Cette opération peux prendre plusieurs minutes.
+
+Une fois l'ajout des index à elastisearch terminé, il va falloir maintenant installer le backend et le frontend sur la machine.
+
+
+## Installation du Back-End
+
 
 
