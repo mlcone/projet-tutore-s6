@@ -34,14 +34,14 @@ export default class SearchForm extends React.Component {
         return (
             <form onSubmit={event => this.handleSubmitForm(event)}>
                 <label>
-                    Nom du jeu:
                     <input
                         type="text"
                         value={this.state.gameName}
                         onChange={event => this.handleChange(event)}
+                        placeholder="Search games"
                     />
                 </label>
-                <input type="submit" value="Rechercher" />
+                <input type="submit" value="Search"/>
                 <ul>
                     { this.state.games.map(game => <Link key={game.appid} to={'/fiche/?appid='+ game.appid}><li>{game.name}</li></Link>)}
                 </ul>

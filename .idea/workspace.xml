@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dc053ce-f150-439e-901c-19038874464d" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/../ElasticSymfony/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../ElasticSymfony/src/Controller/MainController.php" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Fiche.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fiche.js" afterDir="false" />
     </list>
@@ -18,11 +17,12 @@
     <option name="RECENT_TEMPLATES">
       <list>
         <option value="JavaScript File" />
+        <option value="tsconfig.json" />
       </list>
     </option>
   </component>
   <component name="Git.Settings">
-    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../ElasticSymfony" />
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1qhuDYnZ79doAZYi2c2pX9liHEt" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
@@ -47,7 +47,7 @@
       <option name="presentableId" value="Default" />
       <updated>1617544026075</updated>
       <workItem from="1617544028672" duration="7830000" />
-      <workItem from="1617707890001" duration="3626000" />
+      <workItem from="1617707890001" duration="19584000" />
     </task>
     <servers />
   </component>

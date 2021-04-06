@@ -20,5 +20,12 @@ Version 2.0
 
 Fichiers créés: Fiche.js / Nav.js / Login.js
 
-Version 2.1 (current version)
+Version 2.1
 - Changement URL API gameFiche
+
+Version 2.2
+- Design barre de recherche
+- Changement language Page d'accueil (FR -> EN)
+
+Version 2.3 (current version)
+- Ajout image du jeu Fiche.js
