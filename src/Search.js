@@ -1,6 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
+import { path } from './config/config.json';
 
 export default class SearchForm extends React.Component {
     constructor(props) {
@@ -13,7 +14,7 @@ export default class SearchForm extends React.Component {
     }
 
     handleSubmitForm(event) {
-        axios.post(`http://localhost:8000/game/`+ this.state.gameName)
+        axios.post(`http://` + path + `/game/`+ this.state.gameName)
             .then(res => {
                 const games = res.data;
                 this.setState({ games });

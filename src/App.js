@@ -8,6 +8,8 @@ import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 import Search from './Search';
 
 function App() {
+
+    //const homeLink = <Link to={Home}/>;
   return (
       <Router>
         <div className="App">
