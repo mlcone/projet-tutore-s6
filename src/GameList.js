@@ -39,9 +39,9 @@ export default class GameList extends React.Component {
         return this.state.games.map((game) => {
             const {appid, name, release_date, score} = game;
             return (
-                <TableRow>
+                <TableRow key={appid}>
                     <TableCell>
-                        <Link key={appid} to={'/fiche/?appid='+ appid}><li>{name}</li></Link>
+                        <Link to={'/fiche/?appid='+ appid}><li>{name}</li></Link>
                     </TableCell>
                     <TableCell>
                         {release_date}
@@ -64,7 +64,7 @@ export default class GameList extends React.Component {
         }else{
             if(this.state.page !== 270){
                 this.setState({ page: this.state.page+1 });
-                this.setState({ updateList: true })
+                
                 this.getGameList();
             }
         }
