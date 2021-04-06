@@ -143,6 +143,23 @@ final class MainController extends AbstractController
             'genres'=> $tabResponse['genres'],
             'steamspy_tags'=> $tabResponse['steamspy_tags'],
         );
+        
+        $params = [
+            'index' => 'steam_media_data',
+            'body'  => [
+                'size' => '1',
+                'query' => [
+                    'match' => [
+                        'steam_appid' => $id
+                    ]
+                ]
+            ]
+        ];
+
+        $response = $client->search($params);
+        $tabResponse = $response['hits']['hits'][0]['_source'];
+
+        $values[0]['header_image'] = $tabResponse['header_image'];
 
         return new Response(
             json_encode($values)
