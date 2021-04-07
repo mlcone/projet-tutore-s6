@@ -60,9 +60,7 @@ class Fiche extends Component {
                             <img src={this.state.games.map(game => (game.header_image))} alt="thumbnail"></img>
                         </Grid>
                         <Grid item xs>
-                            <Typography gutterBottom variant="subtitle1">
-                                {this.state.games.map(game => (game.name))}
-                            </Typography>
+                            <h2>{this.state.games.map(game => (game.name))}</h2>
                             <Typography variant="body2" color="textSecondary">
                                 Release date : {this.state.games.map(game => (game.release_date))} <br/>
                                 Plateformes : { this.state.games.map(game =>  (game.platforms))} <br/>
