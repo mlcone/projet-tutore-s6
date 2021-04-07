@@ -32,10 +32,19 @@ class Fiche extends Component {
                 const games = res.data;
                 this.setState({ games });
                 this.setState({ updateList: false });
-                this.setState({ screenshots: []})
+                this.setState({ screenshots: []});
+
+                let screenshots = this.state.games.map((data) => (data.screenshots));
+
+                if (typeof screenshots[0] !== 'undefined'){
+                    this.setState({ screenshots: JSON.parse(screenshots[0].replace(/'/g, '"'))});
+                }
+
+                console.log(this.state.screenshots);
             })
-            let myObj = "[{'id':0, }]"//this.state.games.map((data) => (data.screenshots));
-        console.log(JSON.parse(myObj));
+            
+            
+        
         }
     }
 
@@ -56,9 +65,9 @@ class Fiche extends Component {
                             </Typography>
                             <Typography variant="body2" color="textSecondary">
                                 Release date : {this.state.games.map(game => (game.release_date))} <br/>
-                                Plateformes : { this.state.games.map(game =>  (game.platforms)) } <br/>
-                                Publisher : { this.state.games.map(game =>  (game.publisher)) } <br/>
-                                Developer : { this.state.games.map(game =>  (game.developer)) } <br/>
+                                Plateformes : { this.state.games.map(game =>  (game.platforms))} <br/>
+                                Publisher : { this.state.games.map(game =>  (game.publisher))} <br/>
+                                Developer : { this.state.games.map(game =>  (game.developer))} <br/>
                             </Typography>
                         </Grid>
                     </Grid>
@@ -66,7 +75,7 @@ class Fiche extends Component {
                         <Grid item xs>
                             <Carousel>
                                 {
-                                    this.state.screenshots.map((data) => <img src={data.src} alt={data.alt} className="carouselDisplay"/>)
+                                    this.state.screenshots.map((data) => <img src={data.path_full} alt={data.id} className="carouselDisplay"/>)
                                 }
                             </Carousel>
                         </Grid>
@@ -76,9 +85,9 @@ class Fiche extends Component {
                     </Grid>
                 </Grid>
 
-                { this.state.games.map(game => <p key={game.appid}>Categories: {game.categories}</p>) }
-                { this.state.games.map(game => <p key={game.appid}>Genres: {game.genres}</p>) }
-                { this.state.games.map(game => <p key={game.appid}>Tags utilisateurs: {game.steamspy_tags}</p>) }
+                { this.state.games.map(game => <p key={game.appid}>Categories: {game.categories}</p>)}
+                { this.state.games.map(game => <p key={game.appid}>Genres: {game.genres}</p>)}
+                { this.state.games.map(game => <p key={game.appid}>Tags utilisateurs: {game.steamspy_tags}</p>)}
             </div>
         );
     }
