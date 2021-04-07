@@ -74,7 +74,7 @@ final class MainController extends AbstractController
                 'appid' => $tabResponse[$i]['appid'],
                 'name' => $tabResponse[$i]['name'],
                 'release_date' => $tabResponse[$i]['release_date'],
-                'score' => $tabResponse[$i]['positive_ratings'] - $tabResponse[$i]['negative_ratings'],
+                'score' => (int)(($tabResponse[$i]['positive_ratings'] * 100) / ( $tabResponse[$i]['negative_ratings'] + $tabResponse[$i]['positive_ratings'])) . " %",
                 'thumbnail' => $localResponse['hits']['hits'][0]['_source']['header_image']
             );
         }
