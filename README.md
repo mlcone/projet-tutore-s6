@@ -33,7 +33,6 @@ input {
 
 (il faut aussi faire attention à bien remplacer les "\\" par "/" sous windows)
 
-Une fois elastisearch lancé (via le .bat se trouvant dans le /bin du dossier d'installation d'elastisearch)
 
 ### Ajout des index avec logstash
 
