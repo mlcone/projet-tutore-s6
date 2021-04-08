@@ -7,12 +7,8 @@
       <change beforePath="$PROJECT_DIR$/../ElasticSymfony/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../ElasticSymfony/.env" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ElasticSymfony/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../ElasticSymfony/composer.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../ElasticSymfony/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../ElasticSymfony/src/Controller/MainController.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Fiche.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fiche.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,7 +55,7 @@
       <workItem from="1617544028672" duration="7830000" />
       <workItem from="1617707890001" duration="20842000" />
       <workItem from="1617775333340" duration="3297000" />
-      <workItem from="1617880492003" duration="16139000" />
+      <workItem from="1617880492003" duration="16593000" />
     </task>
     <servers />
   </component>
