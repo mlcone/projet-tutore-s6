@@ -1,5 +1,13 @@
 # projet-tutore-s6
 
+## Fichiers du projets
+
+    .
+    ├── config                   # Fichiers de config pour logstash
+    ├── backend                  # API symfony
+    ├── frontend                 # Site react
+    └── README.md                # Tutoriel d'installation du projet
+
 
 ## Ajout des index via logstash
 
@@ -8,7 +16,7 @@ Prérequis : Elastisearch, Logstash et Java
 Il est recommendé d'ajouter le chemin vers le /bin de logstash et d'elastisearch dans le path dans les variable d'environement pour la suite de l'installation.
 
 
-### Structure de fichier
+### Structure de fichiers
 
     .
     ├── conf_files                   # Fichiers de config pour logstash
@@ -48,7 +56,14 @@ Cette opération peux prendre plusieurs minutes.
 Une fois l'ajout des index à elastisearch terminé, il va falloir maintenant installer le backend et le frontend sur la machine.
 
 
+
 ## Installation du Back-End
+
+Prérequis : PHP 7.4.* et composer ( pour php on pourra utiliser wampserver sur windows par exemple )
+
+Si un virtual host est créé, il sera important de bien noter le nom et le port de ce dernier ( ex : steamapi:81 )
+
+### Extraction et installation du serveur symfony
 
 
 
