@@ -36,5 +36,8 @@ Version 2.4
 Version 2.5
 - Ajout du recherche avancée
 
-Version 2.6 (current version)
-- Ajout formulaire de connexion et d'inscription (à faire API côté backend)
+Version 2.6
+- Ajout formulaire de connexion et d'inscription
+
+Version 2.7 (current version)
+- Fix affichage Grille
