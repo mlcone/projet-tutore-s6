@@ -7,10 +7,14 @@ import TableBody from '@material-ui/core/TableBody';
 import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
-import { Button } from '@material-ui/core';
+import { Button, TextField } from '@material-ui/core';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
+
+import FirstPageIcon from '@material-ui/icons/FirstPage';
+import LastPageIcon from '@material-ui/icons/LastPage';
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos';
+import ArrowForwardIosIcon from '@material-ui/icons/ArrowForwardIos';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import ReorderIcon from '@material-ui/icons/Reorder';
 
@@ -43,7 +47,27 @@ export default class GameList extends React.Component {
         }   
     }
 
-    renderTableData(){
+    renderTable(){
+        if(!this.state.displayGrid){
+            return (
+                <Table>
+                    <TableHead>
+                        <TableRow>
+                            <TableCell>Thumbnail</TableCell>
+                            <TableCell>Name</TableCell>
+                            <TableCell>Release Date</TableCell>
+                            <TableCell>Score</TableCell>
+                        </TableRow>
+                    </TableHead>
+                    <TableBody>
+                        {this.renderList()}
+                    </TableBody>
+                </Table>
+            )
+        }
+    }
+
+    renderList(){
         return this.state.games.map((game) => {
             const {appid, name, release_date, score, thumbnail} = game;
             return (
@@ -65,19 +89,35 @@ export default class GameList extends React.Component {
         })
     }
 
-    paginationControl(event){
+    paginationControl(event, select = false){
+        
         if(event === "prev"){
             if(this.state.page !== 1){
                 this.setState({ page: this.state.page-1 });
                 this.setState({ updateList: true })
                 this.getGameList();
             }
-        }else{
-            if(this.state.page !== 2707){
+        }else if(event === "next"){
+            if(this.state.page !== 999){
                 this.setState({ page: this.state.page+1 });
                 this.setState({ updateList: true })
                 this.getGameList();
             }
+        }else if(event === "first"){
+            this.setState({ page: 1 });
+            this.setState({ updateList: true })
+            this.getGameList();
+
+        }else if(event === "last"){
+            this.setState({ page: 999 });
+            this.setState({ updateList: true })
+            this.getGameList();
+        }else if(select){
+            let value = event.target.value;
+            let pageNb = ((value === '') || (value === '0')) ? 1:value;
+            this.setState({ page: pageNb });
+            this.setState({ updateList: true })
+            this.getGameList();
         }
     }
     renderGrid=()=>{
@@ -85,30 +125,48 @@ export default class GameList extends React.Component {
             const {appid,thumbnail} = game;
             if(this.state.displayGrid){
                 return (
-                        
-                            <Grid key={appid} item xs={3}>
-                                <Paper><img src={thumbnail} alt=""/></Paper>
-                            </Grid>
+                    <Grid key={appid} item xs={3}>
+                        <Paper><Link to={'/fiche/?appid='+ appid}><img src={thumbnail} alt="thumbnail" className="thumbnail"></img></Link></Paper>
+                    </Grid>
                 )
             }
         })
     }
     activateGrid=()=>{
         this.setState({displayGrid:true});
+        this.renderList();
         this.renderGrid();
+    }
+    activateList=()=>{
+        this.setState({displayGrid:false});
+        this.renderGrid();
+        this.renderList();
     }
     renderPagination(){
         return (
             <div>
-                <Button onClick={event => this.paginationControl("prev")}>&#8592;</Button>
-                <Button onClick={event => this.paginationControl("next")}>&#8594;</Button>
+                <Button  onClick={event => (this.paginationControl("first"))}><FirstPageIcon></FirstPageIcon></Button>
+                <Button  onClick={event => (this.paginationControl("prev"))}><ArrowBackIosIcon></ArrowBackIosIcon></Button>
+                <TextField
+                    id="pageNumber"
+                    label="Page"
+                    type="number"
+                    InputProps={{ 
+                        inputProps: { min: 1, max: 999 } 
+                    }}
+                    variant="outlined"
+                    defaultValue={this.state.page}
+                    onChange={event => (this.paginationControl(event, true))}
+                ></TextField>
+                <Button  onClick={event => (this.paginationControl("next"))}><ArrowForwardIosIcon></ArrowForwardIosIcon></Button>
+                <Button  onClick={event => (this.paginationControl("last"))}><LastPageIcon></LastPageIcon></Button>
             </div>
         );
     }
     renderOptionsAffichage(){
         return(
             <div>
-                <ReorderIcon></ReorderIcon>
+                 <button onClick={this.activateList}><ReorderIcon></ReorderIcon></button>
                 <button onClick={this.activateGrid}><ViewComfyIcon></ViewComfyIcon></button>
             </div>
         );
@@ -118,20 +176,11 @@ export default class GameList extends React.Component {
             <div>
                 { this.getGameList() }
                 {this.renderOptionsAffichage()}
-                {this.renderGrid()}
-                <Table>
-                    <TableHead>
-                        <TableRow>
-                            <TableCell>Thumbnail</TableCell>
-                            <TableCell>Name</TableCell>
-                            <TableCell>Release Date</TableCell>
-                            <TableCell>Score</TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {this.renderTableData()}
-                    </TableBody>
-                </Table>
+
+                <Grid container>
+                    {this.renderGrid()}
+                </Grid>
+                {this.renderTable()}
                 {this.renderPagination()}
                 
             </div>

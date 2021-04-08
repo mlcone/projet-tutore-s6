@@ -34,17 +34,21 @@ export default class SearchForm extends React.Component {
         }
     }
     handleSubmitForm(event) {
-        axios.post(`http://` + path + `/game/`+ this.state.gameName)
+        if(this.state.gameName !== ''){
+            axios.post(`http://` + path + `/game/`+ this.state.gameName)
             .then(res => {
                 const games = res.data;
                 this.setState({ games });
             })
+        }else{
+            this.setState({ games: [] });
+        }
         event.preventDefault();
     }
 
     handleChange(event) {
         let value = event.target.value;
-
+        
         this.setState({
             gameName: value
         });
@@ -175,8 +179,8 @@ export default class SearchForm extends React.Component {
         return (
             <div>
             <form onSubmit={event => this.handleSubmitForm(event)}>
-                {this.donneesJeux()}
                 <label>
+                    
                     <input
                         type="text"
                         value={this.state.gameName}
