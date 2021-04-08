@@ -31,4 +31,7 @@ Version 2.3
 - Ajout image du jeu Fiche.js
 
 Version 2.4 (current version)
-- Fix error "key + findDomNode" -> Fiche.js 
+- Fix error "key + findDomNode" -> Fiche.js
+
+Version 2.5
+- Ajout du recherche avancée
