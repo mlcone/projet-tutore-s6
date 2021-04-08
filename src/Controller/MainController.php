@@ -273,7 +273,7 @@ final class MainController extends AbstractController
     }
 
     /**
-     * @Route("/game/fiche/{id}", name="gameFiche", methods={"get"})
+     * @Route("/game/fiche/{id}", name="gameFiche", methods={"POST"})
      */
     public function gameFiche(int $id): Response
     {
@@ -301,14 +301,14 @@ final class MainController extends AbstractController
             'name'=> $tabResponse['name'],
             'release_date'=> $tabResponse['release_date'],
             'publisher'=> $tabResponse['publisher'],
-            'platforms'=> $tabResponse['platforms'],
+            'platforms'=> ucfirst(str_replace(';', ', ', $tabResponse['platforms'])),
             'required_age'=> $tabResponse['required_age'],
             'developer'=> $tabResponse['developer'],
-            'categories'=> $tabResponse['categories'],
-            'genres'=> $tabResponse['genres'],
-            'steamspy_tags'=> $tabResponse['steamspy_tags'],
+            'categories'=> str_replace(';', ', ', $tabResponse['categories']),
+            'genres'=> str_replace(';', ', ', $tabResponse['genres']),
+            'steamspy_tags'=> str_replace(';', ', ', $tabResponse['steamspy_tags']),
         );
-        
+
         $params = [
             'index' => 'steam_media_data',
             'body'  => [
