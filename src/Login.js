@@ -65,14 +65,14 @@ export default class Login extends React.Component {
                 <form>
                     <label>
                         <input
-                            type="text"
+                            type="email"
                             value={this.state.email}
                             onChange={event => this.handleChangeEmail(event)}
                             placeholder="Email"
                         />
                         <br/>
                         <input
-                            type="text"
+                            type="password"
                             value={this.state.password}
                             onChange={event => this.handleChangePassword(event)}
                             placeholder="Password"
@@ -102,14 +102,14 @@ export default class Login extends React.Component {
                 <form>
                     <label>
                         <input
-                            type="text"
+                            type="email"
                             value={this.state.email}
                             onChange={event => this.handleChangeEmail(event)}
                             placeholder="Email"
                         />
                         <br/>
                         <input
-                            type="text"
+                            type="password"
                             value={this.state.password}
                             onChange={event => this.handleChangePassword(event)}
                             placeholder="Password"

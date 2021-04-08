@@ -137,6 +137,9 @@ export default class GameList extends React.Component {
                     </Grid>
                 )
             }
+            return(
+                null
+            )
         })
     }
     activateGrid=()=>{
