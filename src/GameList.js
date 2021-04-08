@@ -129,12 +129,14 @@ export default class GameList extends React.Component {
     }
     renderGrid=()=>{
         return this.state.games.map((game)=>{
-            const {appid,thumbnail} = game;
+            const {appid, name, release_date, score, thumbnail} = game;
             if(this.state.displayGrid){
                 return (
-                    <Grid key={appid} item xs={3}>
-                        <Paper><Link to={'/fiche/?appid='+ appid}><img src={thumbnail} alt="thumbnail" className="thumbnail"></img></Link></Paper>
+                    <Grid key={appid} item xs={5}>
+                        <p id='titleGrid'><Link to={'/fiche/?appid='+ appid}>{name}</Link></p>
+                        <Link to={'/fiche/?appid='+ appid}><Paper><div><img id='imageGrid' src={thumbnail} alt="thumbnail" className="thumbnail"></img><p id='infoGameListGrid'>{release_date} / {score}</p></div></Paper></Link>
                     </Grid>
+
                 )
             }
             return(
