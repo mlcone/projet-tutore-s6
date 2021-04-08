@@ -84,11 +84,12 @@ Prérequis : Node, npm et serve (installé avec la commande ```npm install -g se
 Dans le dossier ```frontend/src/config``` se trouve un fichier config.json.
 Dans ce fichier, cherchez la ligne "path" et indiquez le nom de l'hôte de l'api :
 
-```JSON
-{
-    "path" : "steamapi:81"          # pour reprendre l'exemple précédent si l'hôte est "http://steamapi:81/" entrez "steamapi:81"
-}
 ```
+{
+    "path" : "steamapi:81"             # pour reprendre l'exemple précédent si l'hôte est "http://steamapi:81/" entrez "steamapi:81"
+}
+``` 
+
 
 ### Extraction et installation du site react
 
