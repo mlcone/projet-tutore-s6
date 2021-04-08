@@ -14,6 +14,8 @@ import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
 import ViewComfyIcon from '@material-ui/icons/ViewComfy';
 import ReorderIcon from '@material-ui/icons/Reorder';
 
+import "./GameList.css";
+
 
 export default class GameList extends React.Component {
 
@@ -43,11 +45,18 @@ export default class GameList extends React.Component {
 
     renderTableData(){
         return this.state.games.map((game) => {
-            const {appid, name, release_date, score} = game;
+            const {appid, name, release_date, score, thumbnail} = game;
             return (
                 <TableRow key={appid}>
                     <TableCell>
+
                         <Link to={'/fiche/id/'+ appid}><li>{name}</li></Link>
+
+                    <Link to={'/fiche/?appid='+ appid}><img src={thumbnail} alt="thumbnail" className="thumbnail"></img></Link>
+                    </TableCell>
+                    <TableCell>
+                        <Link to={'/fiche/?appid='+ appid}>{name}</Link>
+
                     </TableCell>
                     <TableCell>
                         {release_date}
@@ -68,9 +77,9 @@ export default class GameList extends React.Component {
                 this.getGameList();
             }
         }else{
-            if(this.state.page !== 270){
+            if(this.state.page !== 2707){
                 this.setState({ page: this.state.page+1 });
-                
+                this.setState({ updateList: true })
                 this.getGameList();
             }
         }
@@ -117,6 +126,7 @@ export default class GameList extends React.Component {
                 <Table>
                     <TableHead>
                         <TableRow>
+                            <TableCell>Thumbnail</TableCell>
                             <TableCell>Name</TableCell>
                             <TableCell>Release Date</TableCell>
                             <TableCell>Score</TableCell>

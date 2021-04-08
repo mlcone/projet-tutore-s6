@@ -27,7 +27,6 @@ function App() {
 
 const Home = () => (
     <div>
-        <h1>Search bar</h1>
         <Search />
         <GameList />
     </div>

@@ -10,7 +10,7 @@ function Nav() {
 
     return (
         <nav>
-            <h3>Logo</h3>
+            <h3>MySteamLibrary</h3>
             <ul className="nav-links">
                 <Link style={navStyle} to='/login'>
                     <li>Se connecter</li>
