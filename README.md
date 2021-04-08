@@ -28,3 +28,6 @@ Version 1.4
 
 Version 1.5 (current version)
 - Ajout header-image API gameFiche
+
+Version 1.6
+- Ajout API recherche avancée
