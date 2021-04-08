@@ -86,7 +86,7 @@ Dans ce fichier, cherchez la ligne "path" et indiquez le nom de l'hôte de l'api
 
 ```
 {
-    "path" : "steamapi:81"             # pour reprendre l'exemple précédent si l'hôte est "http://steamapi:81/" entrez "steamapi:81"
+    "path" : "steamapi:81"          # pour reprendre l'exemple précédent si l'hôte est "http://steamapi:81/" entrez "steamapi:81"
 }
 ``` 
 
