@@ -39,8 +39,6 @@ class Fiche extends Component {
                 if (typeof screenshots[0] !== 'undefined'){
                     this.setState({ screenshots: JSON.parse(screenshots[0].replace(/'/g, '"'))});
                 }
-
-                console.log(this.state.screenshots);
             })
             
             
@@ -57,15 +55,15 @@ class Fiche extends Component {
                 <Grid container spacing={3}>
                     <Grid item container xs={12}>
                         <Grid item xs>
-                            <img src={this.state.games.map(game => (game.header_image))} alt="thumbnail"></img>
+                            <img src={this.state.games.map(game => (game.header_image))} alt="thumbnail"/>
                         </Grid>
                         <Grid item xs>
                             <h2>{this.state.games.map(game => (game.name))}</h2>
                             <Typography variant="body2" color="textSecondary">
                                 Release date : {this.state.games.map(game => (game.release_date))} <br/>
-                                Plateformes : { this.state.games.map(game =>  (game.platforms))} <br/>
-                                Publisher : { this.state.games.map(game =>  (game.publisher))} <br/>
-                                Developer : { this.state.games.map(game =>  (game.developer))} <br/>
+                                Plateformes : { this.state.games.map(game => (game.platforms))} <br/>
+                                Publisher : { this.state.games.map(game => (game.publisher))} <br/>
+                                Developer : { this.state.games.map(game => (game.developer))} <br/>
                             </Typography>
                         </Grid>
                     </Grid>
@@ -73,7 +71,7 @@ class Fiche extends Component {
                         <Grid item xs>
                             <Carousel>
                                 {
-                                    this.state.screenshots.map((data) => <img src={data.path_full} alt={data.id} className="carouselDisplay"/>)
+                                    this.state.screenshots.map((data) => <img key={data.id} src={data.path_full} alt={data.id} className="carouselDisplay"/>)
                                 }
                             </Carousel>
                         </Grid>
