@@ -4,13 +4,16 @@ declare(strict_types=1);
 
 namespace App\Controller;
 
+use DateTime;
+use Elasticsearch\Client;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 use Elasticsearch\ClientBuilder;
-use function Symfony\Component\String\u;
+use Elasticsearch\Common\Exceptions\ElasticsearchException;
+use Exception;
+use Symfony\Component\Mime\Message;
 
 /**
  * @Route("", name="main_")
@@ -326,6 +329,161 @@ final class MainController extends AbstractController
         
         return new Response(
             json_encode($values),
+        );
+    }
+
+    /**
+     * @Route("/login/{email}/{password}", name="userLogin", methods={"POST"})
+     */
+    public function userLogin(string $email, string $password): Response
+    {
+
+        $client = ClientBuilder::create()->build();
+
+        $params = [
+            'index' => 'users',
+            'body' => [
+                'size' => 1,
+                'query' => [
+                    'match' => [
+                        'email' => $email
+                    ]
+                ]
+            ]
+        ];
+
+        try{
+            $response = $client->search($params);
+        }catch(ElasticsearchException $e){
+            $error = json_decode($e->getMessage());
+            $errorType = $error->{'error'}->{'type'};
+            
+            switch($errorType){
+                case 'index_not_found_exception': $response = $this->createNewIndex($client);
+                case '': $response = $client->search($params);break;
+
+                default:var_dump('UNKNOWN_EXCEPTION');
+            }
+        }
+
+        $storedPass = 'non';
+        $checkPass = password_verify($password, $storedPass) ;
+
+        if($response['hits']['hits'] === []){
+            $values[] = array(
+                'error' => "no_match",
+                'cause' => "no matching user"                
             );
+        }else if($checkPass){
+            $values[] = array(
+                'error' => "none",
+                'cause' => "user was found and password matches"
+            ); 
+        }else if(!$checkPass){
+            $values[] = array(
+                'error' => "wrong_pass",
+                'cause' => "user was found but password doesn't match"
+            );
+        }
+
+        return new Response(
+            json_encode($values),
+        );
+
+    }
+
+    /**
+     * @Route("/register/{email}/{password}", name="userRegister", methods={"POST"})
+     */
+    public function userRegister(string $email, string $password): Response
+    {
+        $client = ClientBuilder::create()->build();
+
+        $hashed_password = password_hash($password, PASSWORD_ARGON2I);
+
+        $date = new DateTime('now');
+
+        $params = [
+            'index' => 'users',
+            'body' => [
+                'account_creation_date' => $date->format('Y-m-d H:i:s'),
+                'email' => $email,
+                'password' => $hashed_password,
+                'games' => [
+                    [
+                        "appid" => "appid goes here"
+                    ], 
+                ]
+            ]
+        ];
+
+        try{
+            $response = $client->index($params);
+        }catch(ElasticsearchException $e){
+            $error = json_decode($e->getMessage());
+            $errorType = $error->{'error'}->{'type'};
+            dd($e);
+            switch($errorType){
+                case 'index_not_found_exception': $response = $this->createNewIndex($client);
+                case '': $response = $this->addNewUser($client, $email, $password);break;
+
+                default:var_dump('UNKNOWN_EXCEPTION');
+            }
+        }
+        $values[] = array();
+
+        return new Response(
+            json_encode($values),
+        );
+    }
+
+    private function addNewUser(Client $client, string $email, string $password): array
+    {
+        $hashed_password = password_hash($password, PASSWORD_ARGON2I);
+
+        $params = [
+            'index' => 'users',
+            'body' => [
+                'account_creation_date' => new DateTime('now'),
+                'email' => $email,
+                'password' => $hashed_password,
+                'games' => [
+                    [
+                        "appid" => "appid goes here"
+                    ], 
+                ]
+            ]
+        ];
+
+        $response = $client->index($params);
+        dd($response);
+        return $response;
+    }
+
+    private function createNewIndex(Client $client): void
+    {
+        $params = [
+            'index' => 'users',
+            'body' => [
+                'mappings' => [
+                    'properties' => [
+                        'account_creation_date' => [
+                            'type' => 'date'
+                        ],
+                        'email' => [
+                            'type' => 'text'
+                        ],
+                        'password' => [
+                            'type' => 'text'
+                        ],
+                        'games' => [
+                            'type' => 'long'
+                        ]
+                    ]
+                ]
+            ]
+        ];
+
+        $client->indices()->create($params);
     }
 }
