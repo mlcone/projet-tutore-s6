@@ -74,6 +74,7 @@ final class MainController extends AbstractController
                 'appid' => $tabResponse[$i]['appid'],
                 'name' => $tabResponse[$i]['name'],
                 'release_date' => $tabResponse[$i]['release_date'],
+
                 'developer'=> $tabResponse[$i]['developer'],
                 'publisher'=> $tabResponse[$i]['publisher'],
                 'platforms'=> $tabResponse[$i]['platforms'],
@@ -83,6 +84,9 @@ final class MainController extends AbstractController
                 'steamspy_tags'=> $tabResponse[$i]['steamspy_tags'],
                 'score' => $tabResponse[$i]['positive_ratings'] - $tabResponse[$i]['negative_ratings'],
                 'thumbnail' => $localResponse['hits']['hits'][0]['_source']['header_image'],
+                'score' => (int)(($tabResponse[$i]['positive_ratings'] * 100) / ( $tabResponse[$i]['negative_ratings'] + $tabResponse[$i]['positive_ratings'])) . " %",
+                'thumbnail' => $localResponse['hits']['hits'][0]['_source']['header_image']
+
             );
         }
         $response2=new Response();
