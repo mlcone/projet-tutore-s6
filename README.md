@@ -51,13 +51,13 @@ Une fois l'invite de commande ouvert, il faudra entrer la commande suivante en i
 logstash -f ./steam_support_info.conf   # encore une fois avec l'exemple de steam_support_info.conf, il faudra lancer la commande pour chaques fichier de config.
 ```
 
-Cette opération peux prendre plusieurs minutes.
+Cette opération peux prendre plusieurs minutes, voir plusieurs dizaines de minutes pour certains fichiers csv.
 
 Une fois l'ajout des index à elastisearch terminé, il va falloir maintenant installer le backend et le frontend sur la machine.
 
 
 
-## Installation du Back-End
+## Installation du serveur symfony
 
 Prérequis : PHP 7.4.* et composer ( pour php on pourra utiliser wampserver sur windows par exemple )
 
@@ -65,5 +65,31 @@ Si un virtual host est créé, il sera important de bien noter le nom et le port
 
 ### Extraction et installation du serveur symfony
 
+Le serveur symfony se trouve dans le fichier backend, ouvrez un terminal dans ce dossier et entrez la commande suivante :
+```
+composer install
+```
+
+Cela installera tous les composants recquis au fonctionnement du serveur.
+Une fois la commande effectuée et le virtual host mis en place le serveur est près à être utilisé.
+Il faudra aussi qu'elasticsearch soit lancé pour pouvoir utiliser l'api.
 
 
+## Installation du site react
+
+Prérequis : Node, npm et serve (installé avec la commande ```npm install -g serve``` ).
+
+### Extraction et installation du site react
+
+Le site react se trouve dans le dossier frontend, ouvrez un terminal dans ce dossier et entrez la commande suivante :
+```
+npm install
+```
+
+npm installera toutes les dépendances du projet.
+Une fois cette étape terminée il ne restera plus qu'a lancer les commandes suivantes :
+```
+npm run build       # Cette commande va construire le site
+...
+serve -s build      # Cette commande va lancer le build qui sera hébergé localement et accessible via un navigateur sur le PC
+```
