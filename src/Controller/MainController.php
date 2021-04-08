@@ -354,6 +354,7 @@ final class MainController extends AbstractController
 
         try{
             $response = $client->search($params);
+            
         }catch(ElasticsearchException $e){
             $error = json_decode($e->getMessage());
             $errorType = $error->{'error'}->{'type'};
@@ -366,7 +367,7 @@ final class MainController extends AbstractController
             }
         }
 
-        $storedPass = 'non';
+        $storedPass = $response['hits']['hits'][0]['_source']['password'];
         $checkPass = password_verify($password, $storedPass) ;
 
         if($response['hits']['hits'] === []){
@@ -385,7 +386,7 @@ final class MainController extends AbstractController
                 'cause' => "user was found but password doesn't match"
             );
         }
-
+        
         return new Response(
             json_encode($values),
         );
@@ -398,40 +399,64 @@ final class MainController extends AbstractController
     public function userRegister(string $email, string $password): Response
     {
         $client = ClientBuilder::create()->build();
-
-        $hashed_password = password_hash($password, PASSWORD_ARGON2I);
-
-        $date = new DateTime('now');
+        $response = [];
+        $userExist = false;
 
         $params = [
             'index' => 'users',
             'body' => [
-                'account_creation_date' => $date->format('Y-m-d H:i:s'),
-                'email' => $email,
-                'password' => $hashed_password,
-                'games' => [
-                    [
-                        "appid" => "appid goes here"
-                    ], 
+                'size' => 1,
+                'query' => [
+                    'match' => [
+                        'email' => $email
+                    ]
                 ]
             ]
         ];
 
+
         try{
-            $response = $client->index($params);
+            $checkResponse = $client->search($params);
+            
+            if($checkResponse['hits']['hits'] === []){
+                $response = $this->addNewUser($client, $email, $password);
+            }else{
+                $userExist = true;
+            }
         }catch(ElasticsearchException $e){
             $error = json_decode($e->getMessage());
             $errorType = $error->{'error'}->{'type'};
-            dd($e);
-            switch($errorType){
-                case 'index_not_found_exception': $response = $this->createNewIndex($client);
-                case '': $response = $this->addNewUser($client, $email, $password);break;
+            
 
-                default:var_dump('UNKNOWN_EXCEPTION');
+            switch($errorType){
+                case 'index_not_found_exception': $this->createNewIndex($client);
+                case '': 
+                        $checkResponse = $client->search($params);
+                        
+                        if($checkResponse['hits']['hits'] === []){
+                            $userExist = true;
+                            break;
+                        };
+                        
+                        $response = $this->addNewUser($client, $email, $password);
+                        break;
+
+                default:var_dump('UNKNOWN_EXCEPTION', $e);
             }
         }
-        $values[] = array();
 
+        if($userExist){
+            $values[] = array(
+                'error' => "user_exists",
+                'cause' => "user is already indexed"                
+            );
+        }else{
+            $values[] = array(
+                'error' => "none",
+                'cause' => "user was indexed"                
+            );
+        }
+        
         return new Response(
             json_encode($values),
         );
@@ -440,23 +465,23 @@ final class MainController extends AbstractController
     private function addNewUser(Client $client, string $email, string $password): array
     {
         $hashed_password = password_hash($password, PASSWORD_ARGON2I);
-
+        
         $params = [
             'index' => 'users',
             'body' => [
-                'account_creation_date' => new DateTime('now'),
                 'email' => $email,
                 'password' => $hashed_password,
                 'games' => [
                     [
-                        "appid" => "appid goes here"
+                        "appid" => 1111111111111111
                     ], 
                 ]
             ]
         ];
 
+        
         $response = $client->index($params);
-        dd($response);
+        
         return $response;
     }
 
@@ -467,17 +492,18 @@ final class MainController extends AbstractController
             'body' => [
                 'mappings' => [
                     'properties' => [
-                        'account_creation_date' => [
-                            'type' => 'date'
-                        ],
                         'email' => [
-                            'type' => 'text'
+                            'type' => 'keyword'
                         ],
                         'password' => [
                             'type' => 'text'
                         ],
-                        'games' => [
-                            'type' => 'long'
+                        'favorite_games' => [
+                            'properties' => [
+                                'appid' => [
+                                    'type' => 'long'
+                                ] 
+                            ]
                         ]
                     ]
                 ]
