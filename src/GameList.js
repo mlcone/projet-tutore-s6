@@ -49,14 +49,10 @@ export default class GameList extends React.Component {
             return (
                 <TableRow key={appid}>
                     <TableCell>
-
-                        <Link to={'/fiche/id/'+ appid}><li>{name}</li></Link>
-
-                    <Link to={'/fiche/?appid='+ appid}><img src={thumbnail} alt="thumbnail" className="thumbnail"></img></Link>
+                        <Link to={'/fiche/?appid='+ appid}><img src={thumbnail} alt="thumbnail" className="thumbnail"></img></Link>
                     </TableCell>
                     <TableCell>
                         <Link to={'/fiche/?appid='+ appid}>{name}</Link>
-
                     </TableCell>
                     <TableCell>
                         {release_date}
