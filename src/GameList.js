@@ -8,6 +8,11 @@ import TableCell from '@material-ui/core/TableCell';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import { Button } from '@material-ui/core';
+import Grid from '@material-ui/core/Grid';
+import Paper from '@material-ui/core/Paper';
+import { AccessAlarm, ThreeDRotation } from '@material-ui/icons';
+import ViewComfyIcon from '@material-ui/icons/ViewComfy';
+import ReorderIcon from '@material-ui/icons/Reorder';
 
 
 export default class GameList extends React.Component {
@@ -18,7 +23,8 @@ export default class GameList extends React.Component {
         this.state = {
             games: [],
             updateList: true,
-            page: 1
+            page: 1,
+            displayGrid:false
         };
     }
     
@@ -41,7 +47,7 @@ export default class GameList extends React.Component {
             return (
                 <TableRow key={appid}>
                     <TableCell>
-                        <Link to={'/fiche/?appid='+ appid}><li>{name}</li></Link>
+                        <Link to={'/fiche/id/'+ appid}><li>{name}</li></Link>
                     </TableCell>
                     <TableCell>
                         {release_date}
@@ -69,7 +75,23 @@ export default class GameList extends React.Component {
             }
         }
     }
-
+    renderGrid=()=>{
+        return this.state.games.map((game)=>{
+            const {appid,thumbnail} = game;
+            if(this.state.displayGrid){
+                return (
+                        
+                            <Grid key={appid} item xs={3}>
+                                <Paper><img src={thumbnail} alt=""/></Paper>
+                            </Grid>
+                )
+            }
+        })
+    }
+    activateGrid=()=>{
+        this.setState({displayGrid:true});
+        this.renderGrid();
+    }
     renderPagination(){
         return (
             <div>
@@ -78,11 +100,20 @@ export default class GameList extends React.Component {
             </div>
         );
     }
-
+    renderOptionsAffichage(){
+        return(
+            <div>
+                <ReorderIcon></ReorderIcon>
+                <button onClick={this.activateGrid}><ViewComfyIcon></ViewComfyIcon></button>
+            </div>
+        );
+    }
     render(){
         return (
             <div>
                 { this.getGameList() }
+                {this.renderOptionsAffichage()}
+                {this.renderGrid()}
                 <Table>
                     <TableHead>
                         <TableRow>
