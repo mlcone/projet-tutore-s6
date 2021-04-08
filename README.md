@@ -27,5 +27,8 @@ Version 2.2
 - Design barre de recherche
 - Changement language Page d'accueil (FR -> EN)
 
-Version 2.3 (current version)
+Version 2.3
 - Ajout image du jeu Fiche.js
+
+Version 2.4 (current version)
+- Fix error "key + findDomNode" -> Fiche.js 
