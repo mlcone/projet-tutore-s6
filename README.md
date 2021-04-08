@@ -79,6 +79,17 @@ Il faudra aussi qu'elasticsearch soit lancé pour pouvoir utiliser l'api.
 
 Prérequis : Node, npm et serve (installé avec la commande ```npm install -g serve``` ).
 
+### Configuration de l'adresse de l'api
+
+Dans le dossier ```frontend/src/config``` se trouve un fichier config.json.
+Dans ce fichier, cherchez la ligne "path" et indiquez le nom de l'hôte de l'api :
+
+```JSON
+{
+    "path" : "steamapi:81"          # pour reprendre l'exemple précédent si l'hôte est "http://steamapi:81/" entrez "steamapi:81"
+}
+```
+
 ### Extraction et installation du site react
 
 Le site react se trouve dans le dossier frontend, ouvrez un terminal dans ce dossier et entrez la commande suivante :
