@@ -2,9 +2,17 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="0dc053ce-f150-439e-901c-19038874464d" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/../ElasticSymfony/src/Entity/User.php" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../ElasticSymfony/src/Repository/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ElasticSymfony/.env" beforeDir="false" afterPath="$PROJECT_DIR$/../ElasticSymfony/.env" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ElasticSymfony/composer.lock" beforeDir="false" afterPath="$PROJECT_DIR$/../ElasticSymfony/composer.lock" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../ElasticSymfony/src/Controller/MainController.php" beforeDir="false" afterPath="$PROJECT_DIR$/../ElasticSymfony/src/Controller/MainController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/php.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/php.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.css" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/App.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/App.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Fiche.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Fiche.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Login.js" beforeDir="false" afterPath="$PROJECT_DIR$/src/Login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,7 +43,7 @@
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../ElasticSymfony" />
+    <property name="last_opened_file_path" value="$USER_HOME$/Desktop/SearchAdvanced.js" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="ts.external.directory.path" value="C:\Program Files\JetBrains\PhpStorm 2020.3.2\plugins\JavaScriptLanguage\jsLanguageServicesImpl\external" />
     <property name="vue.rearranger.settings.migration" value="true" />
@@ -51,7 +59,7 @@
       <workItem from="1617544028672" duration="7830000" />
       <workItem from="1617707890001" duration="20842000" />
       <workItem from="1617775333340" duration="3297000" />
-      <workItem from="1617880492003" duration="6282000" />
+      <workItem from="1617880492003" duration="16139000" />
     </task>
     <servers />
   </component>

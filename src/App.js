@@ -9,8 +9,6 @@ import Search from './Search';
 import GameList from './GameList';
 
 function App() {
-
-    //const homeLink = <Link to={Home}/>;
   return (
       <Router>
         <div className="App">

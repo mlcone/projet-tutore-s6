@@ -40,9 +40,6 @@ class Fiche extends Component {
                     this.setState({ screenshots: JSON.parse(screenshots[0].replace(/'/g, '"'))});
                 }
             })
-            
-            
-        
         }
     }
 
