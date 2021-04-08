@@ -90,7 +90,7 @@ export default class GameList extends React.Component {
     }
 
     paginationControl(event, select = false){
-        
+        console.log(this.state.page);
         if(event === "prev"){
             if(this.state.page !== 1){
                 this.setState({ page: this.state.page-1 });
@@ -113,8 +113,15 @@ export default class GameList extends React.Component {
             this.setState({ updateList: true })
             this.getGameList();
         }else if(select){
-            let value = event.target.value;
-            let pageNb = ((value === '') || (value === '0')) ? 1:value;
+            let value = parseInt(event.target.value);
+            console.log(value);
+            //vérification des valeurs interdites (si value = NaN ou 0 alors value = 1 et si value > 999 alors value = 999)
+            let pageNb = ((isNaN(value)) || (value === 0)) ? 
+                        1:
+                        (value > 999)? 
+                            999:
+                            value
+            ;
             this.setState({ page: pageNb });
             this.setState({ updateList: true })
             this.getGameList();
@@ -155,7 +162,7 @@ export default class GameList extends React.Component {
                         inputProps: { min: 1, max: 999 } 
                     }}
                     variant="outlined"
-                    defaultValue={this.state.page}
+                    value={this.state.page}
                     onChange={event => (this.paginationControl(event, true))}
                 ></TextField>
                 <Button  onClick={event => (this.paginationControl("next"))}><ArrowForwardIosIcon></ArrowForwardIosIcon></Button>
