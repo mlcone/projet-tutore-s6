@@ -30,8 +30,11 @@ Version 2.2
 Version 2.3
 - Ajout image du jeu Fiche.js
 
-Version 2.4 (current version)
+Version 2.4 
 - Fix error "key + findDomNode" -> Fiche.js
 
 Version 2.5
 - Ajout du recherche avancée
+
+Version 2.6 (current version)
+- Ajout formulaire de connexion et d'inscription (à faire API côté backend)
