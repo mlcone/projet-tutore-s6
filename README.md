@@ -26,8 +26,12 @@ Version 1.3
 Version 1.4
 - Ajout API Pagination
 
-Version 1.5 (current version)
+Version 1.5
 - Ajout header-image API gameFiche
 
 Version 1.6
 - Ajout API recherche avancée
+
+Version 1.7 (current version)
+- Changement affichage informations Fiche.js
+- Fix error 405
