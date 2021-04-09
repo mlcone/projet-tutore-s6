@@ -19,7 +19,8 @@ export default class SearchForm extends React.Component {
         this.state = {
             gameName: "",
             updateList: true,
-            games: []
+            games: [],
+            searchgames[]
         };
     }
     donneesJeux(){
@@ -166,8 +167,8 @@ export default class SearchForm extends React.Component {
             }
         })
             .then(res => {
-                const games = res.data;
-                this.setState({ games });
+                const searchgames = res.data;
+                this.setState({ searchgames });
             })
             .catch(error=>{
                 console.log(error);
@@ -190,7 +191,7 @@ export default class SearchForm extends React.Component {
                 </label>
                 <input type="submit" value="Search"/>
                 <ul>
-                    { this.state.games.map(game => <Link key={game.appid} to={'/fiche/?appid='+ game.appid}><li>{game.name}</li></Link>)}
+                    { this.state.searchgames.map(game => <Link key={game.appid} to={'/fiche/?appid='+ game.appid}><li>{game.name}</li></Link>)}
                 </ul>
             </form>
                 {this.renderAccordion()}
