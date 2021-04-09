@@ -3,8 +3,8 @@
 ## Fichiers du projets
 
     .
-    ├── config                   # Fichiers de config pour logstash
     ├── backend                  # API symfony
+    ├── config                   # Fichiers de config pour logstash
     ├── frontend                 # Site react
     └── README.md                # Tutoriel d'installation du projet
 
