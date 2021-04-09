@@ -1,4 +1,4 @@
-# projet-tutore-s6
+# projet-tutore-s6 (rendu final)
 
 ## Fichiers du projets
 
