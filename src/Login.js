@@ -19,6 +19,7 @@ export default class Login extends React.Component {
             .then(res => {
                 const infos = res.data;
                 this.setState({ infos });
+                console.log(this.state.infos);
             })
         event.preventDefault();
     }
@@ -28,6 +29,7 @@ export default class Login extends React.Component {
             .then(res => {
                 const infos = res.data;
                 this.setState({ infos });
+                console.log(this.state.infos);
             })
         event.preventDefault();
     }
