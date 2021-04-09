@@ -161,8 +161,8 @@ export default class SearchForm extends React.Component {
             url:`http://` + path + `/advancedsearch`,
             data:body,
             headers:{
-                "Content-Type":"application/json",
-                "Access-Control-Allow-Origin":"*",
+                "Content-Type":"multipart/form-data",
+              
             }
         })
             .then(res => {
